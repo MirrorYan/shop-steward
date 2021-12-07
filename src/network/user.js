@@ -1,3 +1,6 @@
 import axios from "@/network";
 
-// export function 
+// login
+export function userLogin(data) {
+  return axios.post('/user/login', data);
+}

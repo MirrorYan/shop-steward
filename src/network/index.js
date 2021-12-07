@@ -2,7 +2,7 @@ import axios from "axios";
 
 const service = axios.create({
   // 请求服务器地址
-  baseURL: 'https://product.chuncongcong.com',
+  baseURL: 'https://product.chuncongcong.com/api/product',
   timeout: 15000
 });
 
@@ -12,10 +12,10 @@ service.interceptors.request.use(
     config.headers['content-Type'] = 'application/json;charset=UTF-8';
 
     // 格式化Get请求
-    if (config.method === 'get' && config.data) {
-      config.url = `${config.url}?${qs.stringify(config.data), { indices: false }}`;
-      config.headers['content-Type'] = 'qpplication/x-www-from-urlencode';
-    }
+    // if (config.method === 'get' && config.data) {
+    //   config.url = `${config.url}?${qs.stringify(config.data), { indices: false }}`;
+    //   config.headers['content-Type'] = 'qpplication/x-www-from-urlencode';
+    // }
     // // 让每个请求携带自定义token
     // if (store.getters.token) {
     //   // 请求头添加toeken

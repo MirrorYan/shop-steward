@@ -1,0 +1,44 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  letter-spacing: 1px;
+}
+
+input,
+button {
+  letter-spacing: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+.button-block {
+  display: block;
+  width: 100%;
+}
+
+
+/* Element Plus Reset */
+// Input
+.el-input {
+  --el-input-bg-color: #F3F3F3;
+  --el-input-focus-color: #8cc5ff;
+}
+.el-input__inner {
+  &, &:hover, &:focus {
+    border-color: var(--el-input-bg-color);
+  }
+  &:focus {
+    outline: 2px solid var(--el-input-focus-color);
+  }
+}
+// Button
+.el-button {
+}
