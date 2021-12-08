@@ -10,6 +10,8 @@ service.interceptors.request.use(
   config => {
     // 设置请求头
     config.headers['content-Type'] = 'application/json;charset=UTF-8';
+    config.headers['Access-Control-Allow-Origin'] = '*';
+    config.headers['access-control-allow-credentials'] = true;
 
     // 格式化Get请求
     // if (config.method === 'get' && config.data) {
@@ -33,7 +35,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     // 一般不作处理
-    return response;
+    return response.data;
   },
   error  => {
     if (error.response.status === 302) {

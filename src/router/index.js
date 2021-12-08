@@ -1,11 +1,16 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from '@/views/Home.vue'
+
+// 路由懒加载:
+// component: () => import('@/views/Login.vue')
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('@/views/Home.vue'),
+    meta: {
+      title: '首页'
+    }
   },
   {
     path: '/login',
@@ -14,13 +19,15 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "locin" */ '../views/Login.vue'),
-    
+    meta: {
+      title: '登录'
+    }
   }
 ]
 
 const router = new createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
 export default router;

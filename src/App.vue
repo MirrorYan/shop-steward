@@ -1,7 +1,12 @@
 <template>
-  <h1 class="page-title"></h1>
+  <h1 class="page-title">{{ $route.meta.title }}</h1>
   <router-view />
 </template>
+
+<script>
+export default {
+}
+</script>
 
 <style lang="less">
 #app {
