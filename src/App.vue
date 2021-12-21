@@ -1,10 +1,16 @@
 <template>
   <h1 class="page-title">{{ $route.meta.title }}</h1>
-  <router-view />
+  <router-view class="layout" />
+  <Nav />
 </template>
 
 <script>
+import Nav from '@/components/Nav/Nav.vue'
+
 export default {
+  components: {
+    Nav
+  }
 }
 </script>
 
@@ -13,20 +19,19 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: var(--color-font);
+
+  min-height: 100vh;
+  padding: 10px 15px 100px;
 }
 
-#nav {
-  padding: 30px;
+.page-title {
+  margin: 0 0 20px;
+  text-align: center;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.layout {
+  max-width: 1000px;
+  margin: auto;
 }
 </style>

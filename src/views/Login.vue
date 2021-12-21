@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { userLogin } from '@/network/user'
+import { userLogin } from '@/network/api'
 
 export default {
   data() {
@@ -28,14 +28,14 @@ export default {
   },
   methods: {
     submit(formName) {
-      this.$refs[formName].validate(valid => {
+      const _this = this;
+      _this.$refs[formName].validate(valid => {
         if (!valid) return false;
         userLogin(this.loginForm)
           .then(res => {
-            console.log(res);
-          })
-          .catch(error => {
-            console.log(error)
+            localStorage.setItem('token', res.token);
+            _this.$store.commit('changeToken');
+            _this.$router.push({ name: 'Home' });
           });
       });
     }

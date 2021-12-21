@@ -2,6 +2,8 @@
   --color-primary: #409eff;
   --color-danger: #f56c6c;
   --color-danger-light: #fde2e2;
+  --color-font: #555;
+  --white: #fff;
 }
 
 *, *::before, *::after {
@@ -24,10 +26,35 @@ img {
   height: auto;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
   color: var(--color-primary);
 }
 
+h3 {
+  font-size: 1.125rem;
+}
+h4 {
+  font-size: 1rem;
+}
+
+
+p {
+  margin: 0 0 10px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul, ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
 
 .button-block {
   display: block;

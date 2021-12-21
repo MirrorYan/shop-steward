@@ -2,7 +2,7 @@ import axios from "axios";
 
 const service = axios.create({
   // 请求服务器地址
-  baseURL: 'https://product.chuncongcong.com/api/product',
+  baseURL: 'https://product.chuncongcong.com/api',
   timeout: 15000
 });
 
@@ -12,18 +12,9 @@ service.interceptors.request.use(
     config.headers['content-Type'] = 'application/json;charset=UTF-8';
     config.headers['Access-Control-Allow-Origin'] = '*';
     config.headers['access-control-allow-credentials'] = true;
-
-    // 格式化Get请求
-    // if (config.method === 'get' && config.data) {
-    //   config.url = `${config.url}?${qs.stringify(config.data), { indices: false }}`;
-    //   config.headers['content-Type'] = 'qpplication/x-www-from-urlencode';
-    // }
-    // // 让每个请求携带自定义token
-    // if (store.getters.token) {
-    //   // 请求头添加toeken
-    //   config.headers['Authorization'] = store.getters.token;
-    // }
-    
+    if (localStorage.getItem('token')) {
+      config.headers['token'] = localStorage.getItem('token');
+    }    
     return config;
   },
   error => {
@@ -34,8 +25,28 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   response => {
-    // 一般不作处理
-    return response.data;
+    const { data } = response;
+    if (data.code === 302) {
+      // 用户未登录...
+      return;
+    }
+    if (data.code === 400) {
+      // 参数信息有误...
+      return;
+    }
+    if (data.code === 404) {
+      // 连接失败...
+      return;
+    }
+    if (data.code === 500) {
+      // 服务器内部错误
+      return;
+    }
+    if (data.code === 506) {
+      // 数据库异常
+      return;
+    }
+    return data.data;
   },
   error  => {
     if (error.response.status === 302) {

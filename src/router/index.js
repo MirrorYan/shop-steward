@@ -13,6 +13,14 @@ const routes = [
     }
   },
   {
+    path: '/purchase',
+    name: 'Purchase',
+    component: () => import('@/views/Purchase.vue'),
+    meta: {
+      title: '进货单'
+    }
+  },
+  {
     path: '/login',
     name: 'Login',
     // route level code-splitting
