@@ -19,7 +19,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--color-font);
 
   min-height: 100vh;
   padding: 10px 15px 100px;

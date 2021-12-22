@@ -3,7 +3,11 @@
     <DateRangePicker @changeDate="getList" />
     <div class="result-container">
       <InfoCard v-for="(item, index) in list" :key="`purchase${index}`">
-        <h3>{{ item.productName }}</h3>
+        <h3>{{ item.productName }}<br>
+          <span class="info-number">( {{ item.productNo }} )</span>
+        </h3>
+        <p class="info-price">¥ {{ item.totalPrice }}</p>
+        <span class="info-date">{{ item.purchaseDate }}</span>
       </InfoCard>
     </div>
   </div>
