@@ -24,9 +24,9 @@ export default {
       text: '进货单',
       link: '/purchase'
     }, {
-      name: 'sale',
+      name: 'sales',
       text: '售货单',
-      link: '/sale'
+      link: '/sales'
     }, {
       name: 'returned',
       text: '退货单',

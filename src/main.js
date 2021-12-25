@@ -4,7 +4,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import '@/assets/less/reset.less'
-import '@/constants/global.constants'
+import '@/constants'
 import router from './router'
 import store from './store'
 
@@ -14,4 +14,4 @@ createApp(App)
   .use(ElementPlus, {
     locale: zhCn
   })
-  .mount('#app')
+  .mount('#app');

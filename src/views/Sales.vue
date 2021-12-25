@@ -5,16 +5,17 @@
       <InfoCard v-for="item in list" :key="item.productId">
         <h3>{{ item.productName }}
           <br><span class="info-number">No.{{ item.productNo }}</span></h3>
-        <span class="info-date">{{ item.purchaseDate }}</span>
-        <div class="info-list-item" v-for="product in item.purchaseLogSkuVoList" :key="product.skuId">
+        <span class="info-date">{{ item.sellDate }}</span>
+        <p class="icon-user">{{ item.sellUsername }}</p>
+        <div class="info-list-item" v-if="item.valueList">
           <div class="info-list-left">
-            <el-tag v-for="value in product.valueList" :key="value.valueId">
+            <el-tag v-for="value in item.valueList" :key="value.valueId">
               {{ value.valueName }}
             </el-tag>
           </div>
           <div class="info-list-right">
-            <p class="info-price"><small>¥</small>{{ product.totalPrice }}</p>
-            <p class="info-quantity"><small>x</small>{{ product.purchaseNums }}</p>
+            <p class="info-price"><small>¥</small>{{ item.sellPrice }}</p>
+            <p class="info-quantity"><small>x</small>{{ item.sellNums }}</p>
           </div>
         </div>
       </InfoCard>
@@ -26,7 +27,7 @@
 import { reactive, toRefs } from '@vue/reactivity'
 import DateRangePicker from '@/components/DatePicker/RangePicker.vue'
 import InfoCard from '@/components/Card/InfoCard.vue'
-import { getPurchaseList } from '@/network/api';
+import { getSalesList } from '@/network/api';
 
 export default {
   components: {
@@ -44,12 +45,13 @@ export default {
     }
 
     function getList([startDate, endDate] = [_global.currentDate, _global.currentDate]) {
-      getPurchaseList({
+      getSalesList({
         ...page,
         startDate,
         endDate
       })
         .then(res => {
+          console.log(res.content);
           info.list = res.content;
         })
     }

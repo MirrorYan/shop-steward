@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "axios"
+import { ElMessage } from "element-plus"
 
 const service = axios.create({
   // 请求服务器地址
@@ -14,7 +15,10 @@ service.interceptors.request.use(
     config.headers['access-control-allow-credentials'] = true;
     if (localStorage.getItem('token')) {
       config.headers['token'] = localStorage.getItem('token');
-    }    
+    }
+    if (config.method === 'get') {
+      // console.log(config)
+    }
     return config;
   },
   error => {
@@ -26,6 +30,12 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const { data } = response;
+    if (data.code === 1) {
+      return data.data;
+    } else {
+      ElMessage.error(data.data.msg);
+      return
+    }
     if (data.code === 302) {
       // 用户未登录...
       return;
@@ -46,9 +56,10 @@ service.interceptors.response.use(
       // 数据库异常
       return;
     }
-    return data.data;
   },
   error  => {
+    const { data } = error.response;
+
     if (error.response.status === 302) {
       // 用户未登录...
       return;
@@ -61,8 +72,8 @@ service.interceptors.response.use(
       // 连接失败...
       return;
     }
-    if (error.response.status === 500) {
-      // 服务器内部错误
+    if (data.code === 500) {
+      ElMessage.error(data.msg);
       return;
     }
     if (error.response.status === 506) {

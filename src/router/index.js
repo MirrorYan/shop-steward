@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
+import store from '@/store';
 
 // 路由懒加载:
 // component: () => import('@/views/Login.vue')
@@ -21,11 +22,24 @@ const routes = [
     }
   },
   {
+    path: '/sales',
+    name: 'Sales',
+    component: () => import('@/views/Sales.vue'),
+    meta: {
+      title: '售货单'
+    }
+  },
+  {
+    path: '/returned',
+    name: 'Returned',
+    component: () => import('@/views/Returned.vue'),
+    mata: {
+      title: '退货单'
+    }
+  },
+  {
     path: '/login',
     name: 'Login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "locin" */ '../views/Login.vue'),
     meta: {
       title: '登录'
@@ -36,6 +50,13 @@ const routes = [
 const router = new createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+});
+
+// 全局前置导航守卫
+router.beforeEach((to, from, next) => {
+  if (!localStorage.getItem('token') && to.name !== 'Login')
+    next({ name: 'Login' });
+  else next();
 });
 
 export default router;

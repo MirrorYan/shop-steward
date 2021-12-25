@@ -34,7 +34,7 @@ export default {
         userLogin(this.loginForm)
           .then(res => {
             localStorage.setItem('token', res.token);
-            _this.$store.commit('changeToken');
+            _this.$store.commit('changeToken', res.token);
             _this.$router.push({ name: 'Home' });
           });
       });

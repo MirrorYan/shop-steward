@@ -24,6 +24,7 @@
 
 <script>
 import { reactive, toRefs } from 'vue';
+import { formatDate } from '@/tools';
 
 export default {
   setup (props, context) {
@@ -40,14 +41,18 @@ export default {
         if (time.getTime() > state.dateEnd.getTime()) {
           state.dateEnd = state.dateStart;
         }
-        context.emit('changeDate', [state.dateStart, state.dateEnd]);
+        triggerChangeDate();
       },
       changeEndDate() {
-        context.emit('changeDate', [state.dateStart, state.dateEnd]);
+        triggerChangeDate();
       }
     });
 
-    context.emit('changeDate', [state.dateStart, state.dateEnd]);
+    function triggerChangeDate() {
+      context.emit('changeDate', [formatDate(state.dateStart), formatDate(state.dateEnd)]);
+    }
+
+    triggerChangeDate();
 
     return {
       ...toRefs(state)
